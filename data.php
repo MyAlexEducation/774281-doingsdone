@@ -30,7 +30,7 @@ $tasks = [
     ],
     [
         "name" => "Купить корм для кота",
-        "data" => "",
+        "data" => "10.02.2019", //проверка работы функции isTaskTime
         "category" => $categories[3],
         "isDone" => false
     ],

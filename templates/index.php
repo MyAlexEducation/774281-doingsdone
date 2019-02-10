@@ -26,7 +26,9 @@
     <?php foreach ($tasks as $key => $item): ?>
         <?php if (!$item["isDone"] or ($show_complete_tasks === 1)): ?>
             <tr class="tasks__item task
-                <?php if ($item["isDone"]): ?> task--completed <?php endif; ?>">
+                <?php if ($item["isDone"]): ?> task--completed <?php endif; ?>
+                <?php if (isTaskTime($item["data"])): ?> task--important <?php endif; ?>
+                ">
                 <td class="task__select">
                     <label class="checkbox task__checkbox">
                         <input class="checkbox__input visually-hidden task__checkbox" type="checkbox"
@@ -39,7 +41,7 @@
                     <a class="download-link" href="#">Home.psd</a>
                 </td>
 
-                <td class="task__date"><?= esc($item["date"]); ?></td>
+                <td class="task__date"><?= esc($item["data"]); ?></td>
             </tr>
         <?php endif; ?>
     <?php endforeach; ?>
