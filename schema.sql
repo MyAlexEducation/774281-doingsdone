@@ -1,8 +1,7 @@
--- что не так то? )
-
 CREATE DATABASE doingsdone
   DEFAULT CHARACTER SET utf8
   DEFAULT COLLATE utf8_general_ci;
+
 USE doingsdone;
 
 CREATE TABLE users (
@@ -23,9 +22,9 @@ CREATE TABLE tasks (
   id INT AUTO_INCREMENT PRIMARY KEY,
   user_id INT,
   project_id INT,
-  date_of_creation TIMESTAMP,
-  date_of_completion TIMESTAMP,
-  state TINYINT,
-  title CHAR(128),
-  critical_time TIMESTAMP
+  date_of_creation TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  date_of_completion TIMESTAMP NOT NULL,
+  state TINYINT NOT NULL,
+  title CHAR(128) NOT NULL,
+  critical_time TIMESTAMP NOT NULL
 );
