@@ -7,8 +7,8 @@ USE doingsdone;
 CREATE TABLE users (
   id INT AUTO_INCREMENT PRIMARY KEY,
   date_of_registration TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  email CHAR(128) NOT NULL UNIQUE,
-  name CHAR(128) NOT NULL UNIQUE,
+  email CHAR(128) NOT NULL,
+  name CHAR(128) NOT NULL,
   password CHAR(128) NOT NULL
 );
 
@@ -26,5 +26,12 @@ CREATE TABLE tasks (
   date_of_completion TIMESTAMP NOT NULL,
   state TINYINT NOT NULL,
   title CHAR(128) NOT NULL,
+  file CHAR(128),
   critical_time TIMESTAMP NOT NULL
 );
+
+CREATE UNIQUE INDEX email ON users(email);
+
+CREATE INDEX user_id ON projects(user_id);
+
+CREATE INDEX user_id ON tasks(user_id);
