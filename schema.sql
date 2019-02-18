@@ -23,11 +23,11 @@ CREATE TABLE tasks (
   user_id INT,
   project_id INT,
   date_of_creation TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  date_of_completion TIMESTAMP NOT NULL,
+  date_of_completion TIMESTAMP,
   state TINYINT NOT NULL,
   title CHAR(128) NOT NULL,
   file CHAR(128),
-  critical_time TIMESTAMP NOT NULL
+  critical_time TIMESTAMP
 );
 
 CREATE UNIQUE INDEX email ON users(email);
