@@ -35,7 +35,7 @@ INSERT INTO tasks
       title = 'Собеседование в IT компании',
       critical_time = STR_TO_DATE('01.12.2019', '%d.%m.%Y');
 INSERT INTO tasks
-  SET user_id = 1,
+  SET user_id = 2,
       project_id = 3,
       state = 0,
       title = 'Выполнить тестовое задание',
@@ -47,7 +47,7 @@ INSERT INTO tasks
       title = 'Сделать задание первого раздела',
       critical_time = STR_TO_DATE('21.12.2019', '%d.%m.%Y');
 INSERT INTO tasks
-  SET user_id = 1,
+  SET user_id = 2,
       project_id = 1,
       state = 0,
       title = 'Встреча с другом',
@@ -58,7 +58,7 @@ INSERT INTO tasks
       state = 0,
       title = 'Купить корм для кота';
 INSERT INTO tasks
-  SET user_id = 1,
+  SET user_id = 2,
       project_id = 4,
       state = 0,
       title = 'Заказать пиццу';
@@ -66,7 +66,7 @@ INSERT INTO tasks
 -- получить список из всех проектов для одного пользователя
 SELECT * FROM projects WHERE user_id = 1;
 -- получить список из всех задач для одного проекта
-SELECT * FROM tasks WHERE project_id = 3;
+SELECT * FROM tasks WHERE user_id = 1;
 -- пометить задачу как выполненную
 UPDATE tasks SET state = 1 WHERE id = 1;
 -- обновить название задачи по её идентификатору
