@@ -28,7 +28,6 @@ foreach ($db_tasks as $key => $item) {
     $task['isDone'] = ($item['state'] === 1);
     array_push($tasks, $task);
 };
-var_dump($tasks);
 $page_content = include_template('index.php', [
     'show_complete_tasks' => $show_complete_tasks,
     'tasks' => $tasks
