@@ -21,7 +21,7 @@ foreach ($db_categories as $key => $item) {
 $filters_categories = 0;
 if (isset($_GET['filter'])) {
     $filters_categories = intval($_GET['filter']);
-    if (!in_array($filters_categories, $categories)) {
+    if ($categories[$filters_categories] === NULL) {
         http_response_code(404);
     }
 }
