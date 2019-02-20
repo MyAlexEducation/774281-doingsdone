@@ -10,17 +10,17 @@ if (!$link) {
 }
 mysqli_set_charset($link, 'utf8');
 
-$current_user_id = 1;
+$current_user_id = 2;
 $sql_get_list_project = 'SELECT * FROM projects WHERE user_id = ' . $current_user_id;
 $db_categories = db_fetch_data($link, $sql_get_list_project);
 $categories = [];
 foreach ($db_categories as $key => $item) {
-    array_push($categories, $item['title']);
+    $categories[$item['id']] = $item['title'];
 };
 
-$filters_categories =  '';
+$filters_categories = 0;
 if (isset($_GET['filter'])) {
-    $filters_categories = $_GET['filter'];
+    $filters_categories = intval($_GET['filter']);
     if (!in_array($filters_categories, $categories)) {
         http_response_code(404);
     }
@@ -32,7 +32,9 @@ $tasks = [];
 foreach ($db_tasks as $key => $item) {
     $task = [];
     $task['name'] = $item['title'];
-    $task['data'] = date('d.m.Y', strtotime($item['critical_time']));
+    if ($task['data'] != NULL) {
+        $task['data'] = date('d.m.Y', strtotime($item['critical_time']));
+    }
     $task['category'] = $item['project'];
     $task['isDone'] = ($item['state'] === 1);
     array_push($tasks, $task);
@@ -41,6 +43,7 @@ foreach ($db_tasks as $key => $item) {
 $page_content = include_template('index.php', [
     'show_complete_tasks' => $show_complete_tasks,
     'tasks' => $tasks,
+    'categories' => $categories,
     'filters_categories' => $filters_categories
 ]);
 

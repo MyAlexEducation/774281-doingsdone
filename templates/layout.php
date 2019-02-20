@@ -45,7 +45,7 @@
                     <ul class="main-navigation__list">
                         <?php foreach ($categories as $key => $item): ?>
                             <li class="main-navigation__list-item">
-                                <a class="main-navigation__list-item-link" href="/?filter=<?= $item ?> ">
+                                <a class="main-navigation__list-item-link" href="/?filter=<?= array_search($item, $categories); ?> ">
                                     <?= esc($item); ?>
                                 </a>
                                 <span class="main-navigation__list-item-count">
