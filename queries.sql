@@ -35,25 +35,25 @@ INSERT INTO tasks
       title = 'Собеседование в IT компании',
       critical_time = STR_TO_DATE('01.12.2019', '%d.%m.%Y');
 INSERT INTO tasks
-  SET user_id = 2,
+  SET user_id = 1,
       project_id = 3,
       state = 0,
       title = 'Выполнить тестовое задание',
       critical_time = STR_TO_DATE('25.12.2019', '%d.%m.%Y');
 INSERT INTO tasks
-  SET user_id = 1,
+  SET user_id = 2,
       project_id = 2,
       state = 1,
       title = 'Сделать задание первого раздела',
       critical_time = STR_TO_DATE('21.12.2019', '%d.%m.%Y');
 INSERT INTO tasks
-  SET user_id = 2,
+  SET user_id = 1,
       project_id = 1,
       state = 0,
       title = 'Встреча с другом',
       critical_time = STR_TO_DATE('22.12.2019', '%d.%m.%Y');
 INSERT INTO tasks
-  SET user_id = 1,
+  SET user_id = 2,
       project_id = 4,
       state = 0,
       title = 'Купить корм для кота';

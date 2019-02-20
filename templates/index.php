@@ -24,7 +24,8 @@
 
 <table class="tasks">
     <?php foreach ($tasks as $key => $item): ?>
-        <?php if (!$item["isDone"] or ($show_complete_tasks === 1)): ?>
+        <?php if ((!$item["isDone"] or ($show_complete_tasks === 1))
+                   and ($filters_categories === '' or $filters_categories === $item['category'])): ?>
             <tr class="tasks__item task
                 <?php if ($item["isDone"]): ?> task--completed <?php endif; ?>
                 <?php if (isTaskTime($item["data"])): ?> task--important <?php endif; ?>
