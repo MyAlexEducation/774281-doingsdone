@@ -99,3 +99,27 @@ function db_insert_data($link, $sql, $data = [])
     }
     return $result;
 }
+
+function convert_db_categories($db, &$data) {
+    $data = [];
+    foreach ($db as $key => $item) {
+        $data[$item['id']] = $item['title'];
+    };
+}
+
+function convert_db_tasks($db, &$data) {
+    $data = [];
+    foreach ($db as $key => $item) {
+        $task = [];
+        $task['name'] = $item['title'];
+        if ($item['critical_time'] != NULL) {
+            $task['data'] = date('d.m.Y', strtotime($item['critical_time']));
+        }
+        if ($item['file'] != NULL) {
+            $task['file'] = $item['file'];
+        }
+        $task['category'] = $item['project'];
+        $task['isDone'] = ($item['state'] === 1);
+        array_push($data, $task);
+    };
+}

@@ -1,44 +1,5 @@
 <?php
-require_once('functions.php');
-require_once('data.php');
-date_default_timezone_set('Europe/Moscow');
-
-$link = mysqli_connect('localhost', 'root', '', 'doingsdone');
-if (!$link) {
-    $error = mysqli_connect_error();
-    $content = include_template('error.php', ['error' => $error]);
-}
-mysqli_set_charset($link, 'utf8');
-
-$current_user_id = 2;
-$sql_get_list_project = 'SELECT * FROM projects WHERE user_id = ' . $current_user_id;
-$db_categories = db_fetch_data($link, $sql_get_list_project);
-$categories = [];
-foreach ($db_categories as $key => $item) {
-    $categories[$item['id']] = $item['title'];
-};
-
-$filters_categories = 0;
-if (isset($_GET['filter'])) {
-    $filters_categories = intval($_GET['filter']);
-    if ($categories[$filters_categories] === NULL) {
-        http_response_code(404);
-    }
-}
-
-$sql_get_list_tasks = 'SELECT projects.title AS project, tasks.title, critical_time, state FROM tasks JOIN projects ON tasks.project_id = projects.id WHERE tasks.user_id = ' . $current_user_id;
-$db_tasks = db_fetch_data($link, $sql_get_list_tasks);
-$tasks = [];
-foreach ($db_tasks as $key => $item) {
-    $task = [];
-    $task['name'] = $item['title'];
-    if ($task['data'] != NULL) {
-        $task['data'] = date('d.m.Y', strtotime($item['critical_time']));
-    }
-    $task['category'] = $item['project'];
-    $task['isDone'] = ($item['state'] === 1);
-    array_push($tasks, $task);
-};
+require_once('init.php');
 
 $page_content = include_template('index.php', [
     'show_complete_tasks' => $show_complete_tasks,
