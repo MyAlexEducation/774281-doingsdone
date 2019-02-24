@@ -1,8 +1,6 @@
 <?php
 require_once('init.php');
 
-var_dump($db_tasks);
-
 $page_content = include_template('index.php', [
     'show_complete_tasks' => $show_complete_tasks,
     'tasks' => $tasks,
