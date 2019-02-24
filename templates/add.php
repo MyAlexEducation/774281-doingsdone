@@ -6,12 +6,12 @@
         $classname = isset($errors['name']) ? "form__input--error" : "";
         $value = isset($task['name']) ? $task['name'] : "";
         ?>
-        <?php if (isset($errors['name'])): ?>
-            <p class="form__message"><?= $errors['name']; ?></p>
-        <?php endif; ?>
         <label class="form__label" for="name">Название <sup>*</sup></label>
 
         <input class="form__input <?= $classname; ?>" type="text" name="name" id="name" value="<?= $value; ?>" placeholder="Введите название">
+        <?php if (isset($errors['name'])): ?>
+            <p class="form__message"><?= $errors['name']; ?></p>
+        <?php endif; ?>
     </div>
 
     <div class="form__row">
@@ -19,15 +19,12 @@
         $classname = isset($errors['project']) ? "form__input--error" : "";
         $value = isset($task['project']) ? $task['project'] : "";
         ?>
-        <?php if (isset($errors['project'])): ?>
-            <p class="form__message"><?= $errors['project']; ?></p>
-        <?php endif; ?>
         <label class="form__label" for="project">Проект</label>
 
         <select class="form__input form__input--select <?= $classname; ?>" name="project" id="project">
             <?php foreach ($categories as $key => $item): ?>
-                <option value="<?= $item; ?>"
-                        <?php if ($value === $item): ?>
+                <option value="<?= array_search($item, $categories); ?>"
+                        <?php if (intval($value) === array_search($item, $categories)): ?>
                         selected
                         <?php endif; ?>
                 >
@@ -35,6 +32,9 @@
                 </option>
             <?php endforeach; ?>
         </select>
+        <?php if (isset($errors['project'])): ?>
+            <p class="form__message"><?= $errors['project']; ?></p>
+        <?php endif; ?>
     </div>
 
     <div class="form__row">
@@ -42,13 +42,14 @@
         $classname = isset($errors['date']) ? "form__input--error" : "";
         $value = ($task['date'] !== '' && isset($task['date'])) ? date('Y-m-d', strtotime($task['date'])) : "";
         ?>
-        <?php if (isset($errors['date'])): ?>
-            <p class="form__message"><?= $errors['date']; ?></p>
-        <?php endif; ?>
+
         <label class="form__label" for="date">Дата выполнения</label>
 
         <input class="form__input form__input--date <?= $classname; ?>" type="date" name="date" id="date" value="<?= $value; ?>"
                placeholder="Введите дату в формате ДД.ММ.ГГГГ">
+        <?php if (isset($errors['date'])): ?>
+            <p class="form__message"><?= $errors['date']; ?></p>
+        <?php endif; ?>
     </div>
 
     <div class="form__row">
