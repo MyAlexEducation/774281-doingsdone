@@ -8,7 +8,8 @@
         ?>
         <label class="form__label" for="name">Название <sup>*</sup></label>
 
-        <input class="form__input <?= $classname; ?>" type="text" name="name" id="name" value="<?= $value; ?>" placeholder="Введите название">
+        <input class="form__input <?= $classname; ?>" type="text" name="name" id="name" value="<?= $value; ?>"
+               placeholder="Введите название">
         <?php if (isset($errors['name'])): ?>
             <p class="form__message"><?= $errors['name']; ?></p>
         <?php endif; ?>
@@ -24,9 +25,9 @@
         <select class="form__input form__input--select <?= $classname; ?>" name="project" id="project">
             <?php foreach ($categories as $key => $item): ?>
                 <option value="<?= array_search($item, $categories); ?>"
-                        <?php if (intval($value) === array_search($item, $categories)): ?>
+                    <?php if (intval($value) === array_search($item, $categories)): ?>
                         selected
-                        <?php endif; ?>
+                    <?php endif; ?>
                 >
                     <?php echo $item; ?>
                 </option>
