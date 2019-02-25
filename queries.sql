@@ -18,11 +18,11 @@ INSERT INTO projects
 -- добавляет пару придуманных пользователей
 
 INSERT INTO users
-  SET email = 'Вася@Почта.рф',
+  SET email = 'vasya@post.rf',
       name = 'Вася',
       password = '123';
 INSERT INTO users
-  SET email = 'Петя@Почта.рф',
+  SET email = 'petya@post.rf',
       name = 'Петя',
       password = '123';
 

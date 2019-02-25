@@ -8,7 +8,8 @@
         ?>
         <label class="form__label" for="name">Название <sup>*</sup></label>
 
-        <input class="form__input <?= $classname; ?>" type="text" name="name" id="name" value="<?= $value; ?>" placeholder="Введите название">
+        <input class="form__input <?= $classname; ?>" type="text" name="name" id="name" value="<?= $value; ?>"
+               placeholder="Введите название">
         <?php if (isset($errors['name'])): ?>
             <p class="form__message"><?= $errors['name']; ?></p>
         <?php endif; ?>
@@ -24,9 +25,9 @@
         <select class="form__input form__input--select <?= $classname; ?>" name="project" id="project">
             <?php foreach ($categories as $key => $item): ?>
                 <option value="<?= array_search($item, $categories); ?>"
-                        <?php if (intval($value) === array_search($item, $categories)): ?>
+                    <?php if (intval($value) === array_search($item, $categories)): ?>
                         selected
-                        <?php endif; ?>
+                    <?php endif; ?>
                 >
                     <?php echo $item; ?>
                 </option>
@@ -40,12 +41,12 @@
     <div class="form__row">
         <?php
         $classname = isset($errors['date']) ? "form__input--error" : "";
-        $value = ($task['date'] !== '' && isset($task['date'])) ? date('Y-m-d', strtotime($task['date'])) : "";
+        $value = ($task['date'] !== '' && isset($task['date'])) ? date('d.m.Y', strtotime($task['date'])) : "";
         ?>
 
         <label class="form__label" for="date">Дата выполнения</label>
 
-        <input class="form__input form__input--date <?= $classname; ?>" type="date" name="date" id="date" value="<?= $value; ?>"
+        <input class="form__input form__input--date <?= $classname; ?>" type="text" name="date" id="date" value="<?= $value; ?>"
                placeholder="Введите дату в формате ДД.ММ.ГГГГ">
         <?php if (isset($errors['date'])): ?>
             <p class="form__message"><?= $errors['date']; ?></p>
@@ -65,6 +66,10 @@
     </div>
 
     <div class="form__row form__row--controls">
+        <?php if ($errors): ?>
+            <p class="error-message">Пожалуйста, исправьте ошибки в форме</p>
+        <?php endif; ?>
+
         <input class="button" type="submit" name="" value="Добавить">
     </div>
 </form>

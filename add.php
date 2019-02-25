@@ -20,8 +20,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $errors['project'] = 'Такого проекта не существует';
     }
 
-    if (strtotime($_POST['date']) < time() && $_POST['date'] !== '') {
+    if (strtotime($_POST['date']) < strtotime(date('d.m.Y 00:00:00')) && $_POST['date'] !== '') {
         $errors['date'] = 'Не корректное время';
+        $task['date'] = '';
     }
 
     if (isset($_FILES['preview']['name'])) {
