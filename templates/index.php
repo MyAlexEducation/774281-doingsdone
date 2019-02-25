@@ -38,11 +38,11 @@
                     </label>
                 </td>
 
-                <?php if ($item['file'] != NULL): ?>
                 <td class="task__file">
-                    <a class="download-link" href="<?= $item['file']; ?>"><?= $item['file']; ?></a>
+                    <?php if ($item['file'] != NULL): ?>
+                        <a class="download-link" href="<?= $item['file']; ?>"><?= $item['file']; ?></a>
+                    <?php endif; ?>
                 </td>
-                <?php endif; ?>
 
                 <td class="task__date"><?= esc($item["data"]); ?></td>
             </tr>

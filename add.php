@@ -22,6 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (strtotime($_POST['date']) < time() && $_POST['date'] !== '') {
         $errors['date'] = 'Не корректное время';
+        $task['date'] = '';
     }
 
     if (isset($_FILES['preview']['name'])) {
