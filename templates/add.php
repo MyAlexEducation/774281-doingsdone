@@ -41,12 +41,12 @@
     <div class="form__row">
         <?php
         $classname = isset($errors['date']) ? "form__input--error" : "";
-        $value = ($task['date'] !== '' && isset($task['date'])) ? date('Y-m-d', strtotime($task['date'])) : "";
+        $value = ($task['date'] !== '' && isset($task['date'])) ? date('d.m.Y', strtotime($task['date'])) : "";
         ?>
 
         <label class="form__label" for="date">Дата выполнения</label>
 
-        <input class="form__input form__input--date <?= $classname; ?>" type="date" name="date" id="date" value="<?= $value; ?>"
+        <input class="form__input form__input--date <?= $classname; ?>" type="text" name="date" id="date" value="<?= $value; ?>"
                placeholder="Введите дату в формате ДД.ММ.ГГГГ">
         <?php if (isset($errors['date'])): ?>
             <p class="form__message"><?= $errors['date']; ?></p>
