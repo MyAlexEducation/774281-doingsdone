@@ -14,7 +14,6 @@
 
 <div class="page-wrapper">
     <div class="container <?php if ($access == 'user' && $_SESSION['user'] != NULL && $sidebar != NULL): ?> container--with-sidebar <?php endif; ?>">
-        <?php if ($access == 'all' || $_SESSION['user'] != NULL): ?>
         <header class="main-header">
             <a href="/">
                 <img src="img/logo.png" width="153" height="42" alt="Логотип Дела в порядке">
@@ -42,6 +41,7 @@
             <?php endif; ?>
         </header>
 
+        <?php if ($access == 'all' || $_SESSION['user'] != NULL): ?>
         <div class="content">
             <section class="content__side">
                 <?= $sidebar; ?>
