@@ -20,11 +20,11 @@ INSERT INTO projects
 INSERT INTO users
   SET email = 'vasya@post.rf',
       name = 'Вася',
-      password = '123';
+      password = '$2y$10$xxEJxfsLJj4nZDFkeUMw4OFzx4J8f5QVRleIV9lPl8.cPKNRWij/G';
 INSERT INTO users
   SET email = 'petya@post.rf',
       name = 'Петя',
-      password = '123';
+      password = '$2y$10$NRiLw/xDmMoIOT.lXXewqOxeAe7n9MTFhVUVLhdAu/sGo0FLQ90C2';
 
 -- добавляет существующий список задач
 

@@ -1,6 +1,10 @@
 <?php
 require_once('init.php');
 
+$access = 'all';
+
+$sidebar = include_template('register_sidebar.php', []);
+
 $page_content = include_template('register.php', []);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -48,8 +52,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 $layout_content = include_template('layout.php', [
     'title' => 'Дела в порядке',
     'content' => $page_content,
+    'sidebar' => $sidebar,
     'categories' => $categories,
     'tasks' => $tasks,
+    'access' => $access
 ]);
 
 echo($layout_content);

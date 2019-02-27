@@ -1,6 +1,14 @@
 <?php
 require_once('init.php');
 
+$access = 'user';
+
+$sidebar = include_template('project_sidebar.php', [
+    'tasks' => $tasks,
+    'categories' => $categories,
+    'filters_categories' => $filters_categories
+]);
+
 $page_content = include_template('add.php', [
     'categories' => $categories
 ]);
@@ -59,8 +67,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 $layout_content = include_template('layout.php', [
     'title' => 'Дела в порядке',
     'content' => $page_content,
+    'sidebar' => $sidebar,
     'categories' => $categories,
     'tasks' => $tasks,
+    'access' => $access
 ]);
 
 echo($layout_content);
