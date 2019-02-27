@@ -9,16 +9,17 @@
     <link rel="stylesheet" href="css/flatpickr.min.css">
 </head>
 
-<body>
+<body <?php if ($access == 'user' && $_SESSION['user'] == NULL): ?> class="body-background" <?php endif; ?>>
 <h1 class="visually-hidden">Дела в порядке</h1>
 
 <div class="page-wrapper">
-    <div class="container container--with-sidebar">
+    <div class="container <?php if ($access == 'user' && $_SESSION['user'] != NULL && $sidebar != NULL): ?> container--with-sidebar <?php endif; ?>">
         <header class="main-header">
             <a href="/">
                 <img src="img/logo.png" width="153" height="42" alt="Логотип Дела в порядке">
             </a>
 
+            <?php if ($_SESSION['user'] != NULL): ?>
             <div class="main-header__side">
                 <a class="main-header__side-item button button--plus open-modal" href="add.php">Добавить
                     задачу</a>
@@ -29,40 +30,29 @@
                     </div>
 
                     <div class="user-menu__data">
-                        <p>Константин</p>
+                        <p><?= $_SESSION['user']['name']; ?></p>
 
-                        <a href="#">Выйти</a>
+                        <a href="../logout.php">Выйти</a>
                     </div>
                 </div>
             </div>
+            <?php else: ?>
+                <a class="main-header__side-item button button--transparent" href="auth.php">Войти</a>
+            <?php endif; ?>
         </header>
 
         <div class="content">
+            <?php if ($access == 'all' || $_SESSION['user'] != NULL): ?>
             <section class="content__side">
-                <h2 class="content__side-heading">Проекты</h2>
-
-                <nav class="main-navigation">
-                    <ul class="main-navigation__list">
-                        <?php foreach ($categories as $key => $item): ?>
-                            <li class="main-navigation__list-item">
-                                <a class="main-navigation__list-item-link" href="/?filter=<?= array_search($item, $categories); ?> ">
-                                    <?= esc($item); ?>
-                                </a>
-                                <span class="main-navigation__list-item-count">
-                                    <?php echo(countCategory($tasks, $item)) ?>
-                                </span>
-                            </li>
-                        <?php endforeach; ?>
-                    </ul>
-                </nav>
-
-                <a class="button button--transparent button--plus content__side-button"
-                   href="pages/form-project.html" target="project_add">Добавить проект</a>
+                <?= $sidebar; ?>
             </section>
 
             <main class="content__main">
                 <?= $content; ?>
             </main>
+            <?php else: ?>
+                <?php require_once('guest.php'); ?>
+            <?php endif; ?>
         </div>
     </div>
 </div>
@@ -75,7 +65,9 @@
             <p>Веб-приложение для удобного ведения списка дел.</p>
         </div>
 
+        <?php if ($access == 'user' && $_SESSION['user'] != NULL): ?>
         <a class="main-footer__button button button--plus" href="add.php">Добавить задачу</a>
+        <?php endif; ?>
 
         <div class="main-footer__social social">
             <span class="visually-hidden">Мы в соцсетях:</span>
@@ -129,4 +121,5 @@
 <script src="flatpickr.js"></script>
 <script src="script.js"></script>
 </body>
+
 </html>
