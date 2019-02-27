@@ -41,8 +41,8 @@
             <?php endif; ?>
         </header>
 
-        <?php if ($access == 'all' || $_SESSION['user'] != NULL): ?>
         <div class="content">
+            <?php if ($access == 'all' || $_SESSION['user'] != NULL): ?>
             <section class="content__side">
                 <?= $sidebar; ?>
             </section>
@@ -50,10 +50,10 @@
             <main class="content__main">
                 <?= $content; ?>
             </main>
+            <?php else: ?>
+                <?php require_once('guest.php'); ?>
+            <?php endif; ?>
         </div>
-        <?php else: ?>
-        <?php require_once('guest.php'); ?>
-        <?php endif; ?>
     </div>
 </div>
 
