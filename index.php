@@ -15,6 +15,24 @@ if (isset($_GET['show_completed'])) {
     $_SESSION['filters']['show_completed'] = $filters['show_completed'];
 }
 
+if (intval($_GET['task_id']) != 0  && (intval($_GET['check']) == 0 || intval($_GET['check']) == 1)) {
+    $is_page_update = false;
+    $value_state = intval($_GET['check']);
+    $value_task_id = intval($_GET['task_id']);
+    $sql_update_isDone_task = 'UPDATE tasks SET state = ? WHERE id = ?';
+    $sql_task_info = [$value_state, $value_task_id];
+    foreach ($tasks as $key => $item) {
+        if ($item['id'] === $value_task_id && intval($item['isDone']) !== $value_state) {
+            db_fetch_data($link, $sql_update_isDone_task, $sql_task_info);
+            $is_page_update = true;
+        }
+    }
+    if ($is_page_update) {
+        $is_page_update = false;
+        header('Refresh:0');
+    }
+}
+
 $sidebar = include_template('project_sidebar.php', [
     'tasks' => $tasks,
     'categories' => $categories,
