@@ -106,7 +106,7 @@ function convert_db_tasks($db, &$data) {
     };
 }
 
-function countCategory($elements, $category)
+function count_category($elements, $category)
 {
     $count = 0;
     foreach ($elements as $key => $item) {
@@ -118,7 +118,7 @@ function countCategory($elements, $category)
 }
 
 
-function isTaskTime($taskData)
+function is_task_time($taskData)
 {
     $currentTime = time();
     $taskTime = strtotime($taskData);

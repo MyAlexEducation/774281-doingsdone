@@ -29,7 +29,7 @@
                    and (is_date_interval($intervals[$_SESSION['filters']['filter_task']], $item["data"]))): ?>
             <tr class="tasks__item task
                 <?php if ($item["isDone"]): ?> task--completed <?php endif; ?>
-                <?php if (isTaskTime($item["data"])): ?> task--important <?php endif; ?>
+                <?php if (is_task_time($item["data"])): ?> task--important <?php endif; ?>
                 ">
                 <td class="task__select">
                     <label class="checkbox task__checkbox">

@@ -9,7 +9,7 @@
                     <?= esc($item); ?>
                 </a>
                 <span class="main-navigation__list-item-count">
-                                    <?php echo(countCategory($tasks, $item)) ?>
+                                    <?php echo(count_category($tasks, $item)) ?>
                                 </span>
             </li>
         <?php endforeach; ?>
