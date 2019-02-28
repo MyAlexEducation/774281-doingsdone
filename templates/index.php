@@ -8,10 +8,10 @@
 
 <div class="tasks-controls">
     <nav class="tasks-switch">
-        <a href="/?filter_task=all" class="tasks-switch__item tasks-switch__item--active">Все задачи</a>
-        <a href="/?filter_task=today" class="tasks-switch__item">Повестка дня</a>
-        <a href="/?filter_task=tomorrow" class="tasks-switch__item">Завтра</a>
-        <a href="/?filter_task=overdue" class="tasks-switch__item">Просроченные</a>
+        <a href="/?filter_task=all" class="tasks-switch__item <?php if ($_SESSION['filters']['filter_task'] === 'all'): ?> tasks-switch__item--active <?php endif; ?>">Все задачи</a>
+        <a href="/?filter_task=today" class="tasks-switch__item <?php if ($_SESSION['filters']['filter_task'] === 'today'): ?> tasks-switch__item--active <?php endif; ?>">Повестка дня</a>
+        <a href="/?filter_task=tomorrow" class="tasks-switch__item <?php if ($_SESSION['filters']['filter_task'] === 'tomorrow'): ?> tasks-switch__item--active <?php endif; ?>">Завтра</a>
+        <a href="/?filter_task=overdue" class="tasks-switch__item <?php if ($_SESSION['filters']['filter_task'] === 'overdue'): ?> tasks-switch__item--active <?php endif; ?>">Просроченные</a>
     </nav>
 
     <label class="checkbox">
@@ -24,9 +24,9 @@
 
 <table class="tasks">
     <?php foreach ($tasks as $key => $item): ?>
-        <?php if ((!$item["isDone"] or ($_GET['show_completed'] === '1'))
-                   and ($filters_categories === 0 or $filters_categories === array_search($item['category'], $categories))
-                   and (is_date_interval($intervals[$_GET['filter_task']], $item["data"]))): ?>
+        <?php if ((!$item["isDone"] or $_SESSION['filters']['show_completed'])
+                   and ($_SESSION['filters']['filter_categories'] === 0 or $_SESSION['filters']['filter_categories'] === array_search($item['category'], $categories))
+                   and (is_date_interval($intervals[$_SESSION['filters']['filter_task']], $item["data"]))): ?>
             <tr class="tasks__item task
                 <?php if ($item["isDone"]): ?> task--completed <?php endif; ?>
                 <?php if (isTaskTime($item["data"])): ?> task--important <?php endif; ?>
