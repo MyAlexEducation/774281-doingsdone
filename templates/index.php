@@ -34,7 +34,7 @@
                 <td class="task__select">
                     <label class="checkbox task__checkbox">
                         <input class="checkbox__input visually-hidden task__checkbox" type="checkbox"
-                               value="<?= $item['id'] ?>">
+                               value="<?= $item['id'] ?>" <?php if ($item["isDone"]): ?> checked <?php endif; ?>>
                         <span class="checkbox__text"><?= esc($item["name"]); ?></span>
                     </label>
                 </td>
