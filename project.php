@@ -18,13 +18,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (empty($_POST['name'])) {
         $errors['name'] = 'Это поле надо заполнить';
-    }
+    } else {
+        $sql_get_user_projects = 'SELECT * FROM projects WHERE user_id = ? AND title = ?';
+        $user_project_info = db_fetch_data($link, $sql_get_user_projects, [$current_user_id, $_POST['name']]);
 
-    $sql_get_user_projects = 'SELECT * FROM projects WHERE user_id = ? AND title = ?';
-    $user_project_info = db_fetch_data($link, $sql_get_user_projects, [$current_user_id, $_POST['name']]);
-
-    if ($user_project_info !== NULL) {
-        $errors['name'] = 'У вас уже есть проект с данным именем';
+        if ($user_project_info !== NULL) {
+            $errors['name'] = 'У вас уже есть проект с данным именем';
+        }
     }
 
     if (empty($errors)) {
