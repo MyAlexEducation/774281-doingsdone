@@ -11,7 +11,8 @@ $page_content = include_template('index.php', [
     'show_complete_tasks' => $show_complete_tasks,
     'tasks' => $tasks,
     'categories' => $categories,
-    'filters_categories' => $filters_categories
+    'filters_categories' => $filters_categories,
+    'intervals' => $intervals
 ]);
 
 $layout_content = include_template('layout.php', [

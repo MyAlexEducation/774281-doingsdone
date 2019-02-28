@@ -17,31 +17,12 @@ function include_template($name, $data)
     return $result;
 }
 
-function countCategory($elements, $category)
-{
-    $count = 0;
-    foreach ($elements as $key => $item) {
-        if ($item["category"] === $category) {
-            $count++;
-        }
-    }
-    return $count;
-}
-
 function esc($str)
 {
     $text = htmlspecialchars($str);
     //$text = strip_tags($str);
 
     return $text;
-}
-
-function isTaskTime($taskData)
-{
-    $currentTime = time();
-    $taskTime = strtotime($taskData);
-    $criticalTaskTime = 3600;  //количество секунд в часе
-    return $taskTime - $currentTime < $criticalTaskTime && $taskTime != 0;
 }
 
 function db_get_prepare_stmt($link, $sql, $data = [])
@@ -122,4 +103,31 @@ function convert_db_tasks($db, &$data) {
         $task['isDone'] = ($item['state'] === 1);
         array_push($data, $task);
     };
+}
+
+function countCategory($elements, $category)
+{
+    $count = 0;
+    foreach ($elements as $key => $item) {
+        if ($item["category"] === $category) {
+            $count++;
+        }
+    }
+    return $count;
+}
+
+
+function isTaskTime($taskData)
+{
+    $currentTime = time();
+    $taskTime = strtotime($taskData);
+    $criticalTaskTime = 3600;  //количество секунд в часе
+    return $taskTime - $currentTime < $criticalTaskTime && $taskTime != 0;
+}
+
+function is_date_interval($interval, $date)
+{
+    $current_interval = strtotime($date) + 86400 - time();
+    return ($current_interval > $interval['min'] || $interval['min'] === NULL)
+        && ($current_interval < $interval['max'] || $interval['max'] === NULL);
 }
