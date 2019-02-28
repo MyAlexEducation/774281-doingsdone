@@ -28,21 +28,7 @@ if ($current_user_id !== NULL) {
         }
     }
 
-    if (isset($_GET['filter_task'])) {
-        $filters['filter_task'] = $_GET['filter_task'];
-        if ($intervals[$filters['filter_task']] === NULL) {
-            http_response_code(404);
-        } else {
-            $_SESSION['filters']['filter_task']= $filters['filter_task'];
-        }
-    }
-
-    if (isset($_GET['show_completed'])) {
-        $filters['show_completed'] = ($_GET['show_completed'] === '1');
-        $_SESSION['filters']['show_completed'] = $filters['show_completed'];
-    }
-
-    $sql_get_list_tasks = 'SELECT projects.title AS project, tasks.title, critical_time, state, file FROM tasks JOIN projects ON tasks.project_id = projects.id WHERE tasks.user_id = ?';
+    $sql_get_list_tasks = 'SELECT projects.title AS project, tasks.title, critical_time, state, file, tasks.id AS id FROM tasks JOIN projects ON tasks.project_id = projects.id WHERE tasks.user_id = ?';
     $db_tasks = db_fetch_data($link, $sql_get_list_tasks, [$current_user_id]);
     convert_db_tasks($db_tasks, $tasks);
 }

@@ -17,7 +17,7 @@
     <label class="checkbox">
         <!--добавить сюда аттрибут "checked", если переменная $show_complete_tasks равна единице-->
         <input class="checkbox__input visually-hidden show_completed" type="checkbox"
-            <?php if ($_GET['show_completed'] === '1'): ?> checked <?php endif; ?>>
+            <?php if ($_SESSION['filters']['show_completed']): ?> checked <?php endif; ?>>
         <span class="checkbox__text">Показывать выполненные</span>
     </label>
 </div>
@@ -34,7 +34,7 @@
                 <td class="task__select">
                     <label class="checkbox task__checkbox">
                         <input class="checkbox__input visually-hidden task__checkbox" type="checkbox"
-                               value="1">
+                               value="<?= $item['id'] ?>">
                         <span class="checkbox__text"><?= esc($item["name"]); ?></span>
                     </label>
                 </td>

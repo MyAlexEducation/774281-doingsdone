@@ -1,6 +1,20 @@
 <?php
 require_once('init.php');
 
+if (isset($_GET['filter_task'])) {
+    $filters['filter_task'] = $_GET['filter_task'];
+    if ($intervals[$filters['filter_task']] === NULL) {
+        http_response_code(404);
+    } else {
+        $_SESSION['filters']['filter_task']= $filters['filter_task'];
+    }
+}
+
+if (isset($_GET['show_completed'])) {
+    $filters['show_completed'] = ($_GET['show_completed'] === '1');
+    $_SESSION['filters']['show_completed'] = $filters['show_completed'];
+}
+
 $sidebar = include_template('project_sidebar.php', [
     'tasks' => $tasks,
     'categories' => $categories,

@@ -101,6 +101,7 @@ function convert_db_tasks($db, &$data) {
         }
         $task['category'] = $item['project'];
         $task['isDone'] = ($item['state'] === 1);
+        $task['id'] = ($item['id']);
         array_push($data, $task);
     };
 }
