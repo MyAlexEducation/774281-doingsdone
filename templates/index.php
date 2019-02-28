@@ -24,9 +24,9 @@
 
 <table class="tasks">
     <?php foreach ($tasks as $key => $item): ?>
-        <?php if ((!$item["isDone"] or $_SESSION['filters']['show_completed'])
-                   and ($_SESSION['filters']['filter_categories'] === 0 or $_SESSION['filters']['filter_categories'] === array_search($item['category'], $categories))
-                   and (is_date_interval($intervals[$_SESSION['filters']['filter_task']], $item["data"]))): ?>
+        <?php if ((!$item["isDone"] || $_SESSION['filters']['show_completed'])
+                   && ($_SESSION['filters']['filter_categories'] === 0 || $_SESSION['filters']['filter_categories'] === array_search($item['category'], $categories))
+                   && (is_date_interval($intervals[$_SESSION['filters']['filter_task']], $item["data"]))): ?>
             <tr class="tasks__item task
                 <?php if ($item["isDone"]): ?> task--completed <?php endif; ?>
                 <?php if (is_task_time($item["data"])): ?> task--important <?php endif; ?>
