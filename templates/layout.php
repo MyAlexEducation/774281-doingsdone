@@ -20,36 +20,38 @@
             </a>
 
             <?php if ($_SESSION['user'] != NULL): ?>
-            <div class="main-header__side">
-                <a class="main-header__side-item button button--plus open-modal" href="add.php">Добавить
-                    задачу</a>
+                <div class="main-header__side">
+                    <a class="main-header__side-item button button--plus open-modal" href="add.php">Добавить
+                        задачу</a>
 
-                <div class="main-header__side-item user-menu">
-                    <div class="user-menu__image">
-                        <img src="img/user.png" width="40" height="40" alt="Пользователь">
-                    </div>
+                    <div class="main-header__side-item user-menu">
+                        <div class="user-menu__image">
+                            <img src="img/user.png" width="40" height="40" alt="Пользователь">
+                        </div>
 
-                    <div class="user-menu__data">
-                        <p><?= $_SESSION['user']['name']; ?></p>
+                        <div class="user-menu__data">
+                            <p><?= esc($_SESSION['user']['name']); ?></p>
 
-                        <a href="../logout.php">Выйти</a>
+                            <a href="../logout.php">Выйти</a>
+                        </div>
                     </div>
                 </div>
-            </div>
             <?php else: ?>
-                <a class="main-header__side-item button button--transparent" href="auth.php">Войти</a>
+                <div class="main-header__side">
+                    <a class="main-header__side-item button button--transparent" href="auth.php">Войти</a>
+                </div>
             <?php endif; ?>
         </header>
 
         <div class="content">
             <?php if ($access == 'all' || $_SESSION['user'] != NULL): ?>
-            <section class="content__side">
-                <?= $sidebar; ?>
-            </section>
+                <section class="content__side">
+                    <?= $sidebar; ?>
+                </section>
 
-            <main class="content__main">
-                <?= $content; ?>
-            </main>
+                <main class="content__main">
+                    <?= $content; ?>
+                </main>
             <?php else: ?>
                 <?php require_once('guest.php'); ?>
             <?php endif; ?>
@@ -66,7 +68,7 @@
         </div>
 
         <?php if ($access == 'user' && $_SESSION['user'] != NULL): ?>
-        <a class="main-footer__button button button--plus" href="add.php">Добавить задачу</a>
+            <a class="main-footer__button button button--plus" href="add.php">Добавить задачу</a>
         <?php endif; ?>
 
         <div class="main-footer__social social">

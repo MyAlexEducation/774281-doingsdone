@@ -8,7 +8,7 @@
         ?>
         <label class="form__label" for="name">Название <sup>*</sup></label>
 
-        <input class="form__input <?= $classname; ?>" type="text" name="name" id="name" value="<?= $value; ?>"
+        <input class="form__input <?= $classname; ?>" type="text" name="name" id="name" value="<?= esc($value); ?>"
                placeholder="Введите название">
         <?php if (isset($errors['name'])): ?>
             <p class="form__message"><?= $errors['name']; ?></p>
@@ -29,7 +29,7 @@
                         selected
                     <?php endif; ?>
                 >
-                    <?php echo $item; ?>
+                    <?php echo esc($item); ?>
                 </option>
             <?php endforeach; ?>
         </select>
@@ -41,12 +41,12 @@
     <div class="form__row">
         <?php
         $classname = isset($errors['date']) ? "form__input--error" : "";
-        $value = ($task['date'] !== '' && isset($task['date'])) ? date('d.m.Y', strtotime($task['date'])) : "";
+        $value = (isset($task['date']) && $task['date'] !== '') ? date('d.m.Y', strtotime($task['date'])) : "";
         ?>
 
         <label class="form__label" for="date">Дата выполнения</label>
 
-        <input class="form__input form__input--date <?= $classname; ?>" type="text" name="date" id="date" value="<?= $value; ?>"
+        <input class="form__input form__input--date <?= $classname; ?>" type="text" name="date" id="date" value="<?= ($value); ?>"
                placeholder="Введите дату в формате ДД.ММ.ГГГГ">
         <?php if (isset($errors['date'])): ?>
             <p class="form__message"><?= $errors['date']; ?></p>
@@ -66,7 +66,7 @@
     </div>
 
     <div class="form__row form__row--controls">
-        <?php if ($errors): ?>
+        <?php if (isset($errors)): ?>
             <p class="error-message">Пожалуйста, исправьте ошибки в форме</p>
         <?php endif; ?>
 

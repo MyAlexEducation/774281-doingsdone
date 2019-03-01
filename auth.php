@@ -40,7 +40,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (empty($errors)) {
         $current_user_id = intval($user['id']);
         $_SESSION['user'] = $user;
-        header("Location: /");
+        $_SESSION['filters'] = [
+            'filter_categories' => 0,
+            'filter_task' => 'all',
+            'filter_completed' => false
+        ];
+        header('Location: /');
     }
 }
 

@@ -6,7 +6,6 @@ $access = 'user';
 $sidebar = include_template('project_sidebar.php', [
     'tasks' => $tasks,
     'categories' => $categories,
-    'filters_categories' => $filters_categories
 ]);
 
 $page_content = include_template('add.php', [
