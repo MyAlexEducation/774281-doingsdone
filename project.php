@@ -3,8 +3,7 @@ require_once('init.php');
 
 $sidebar = include_template('project_sidebar.php', [
     'tasks' => $tasks,
-    'categories' => $categories,
-    'filters_categories' => $filters_categories
+    'categories' => $categories
 ]);
 
 $page_content = include_template('project.php', []);

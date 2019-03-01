@@ -12,7 +12,11 @@ if (isset($_GET['filter_task'])) {
 
 if (isset($_GET['show_completed'])) {
     $filters['show_completed'] = ($_GET['show_completed'] === '1');
-    $_SESSION['filters']['show_completed'] = $filters['show_completed'];
+    $_SESSION['filters']['filter_completed'] = $filters['show_completed'];
+}
+
+if(!isset($_GET['task_id'])) {
+    $_GET['task_id'] = NULL;
 }
 
 if (intval($_GET['task_id']) != 0  && (intval($_GET['check']) == 0 || intval($_GET['check']) == 1)) {
@@ -36,14 +40,11 @@ if (intval($_GET['task_id']) != 0  && (intval($_GET['check']) == 0 || intval($_G
 $sidebar = include_template('project_sidebar.php', [
     'tasks' => $tasks,
     'categories' => $categories,
-    'filters_categories' => $filters_categories
 ]);
 
 $page_content = include_template('index.php', [
-    'show_complete_tasks' => $show_complete_tasks,
     'tasks' => $tasks,
     'categories' => $categories,
-    'filters' => $filters,
     'intervals' => $intervals
 ]);
 
@@ -53,7 +54,6 @@ $layout_content = include_template('layout.php', [
     'sidebar' => $sidebar,
     'categories' => $categories,
     'tasks' => $tasks,
-    'filters' => $filters,
     'access' => $access
 ]);
 

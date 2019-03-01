@@ -1,5 +1,8 @@
 <?php
 
+$tasks = [];
+$categories = [];
+
 $intervals = [
     'all' => [],
     'today' => [

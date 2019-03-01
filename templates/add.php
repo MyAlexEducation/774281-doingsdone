@@ -41,7 +41,7 @@
     <div class="form__row">
         <?php
         $classname = isset($errors['date']) ? "form__input--error" : "";
-        $value = ($task['date'] !== '' && isset($task['date'])) ? date('d.m.Y', strtotime($task['date'])) : "";
+        $value = (isset($task['date']) && $task['date'] !== '') ? date('d.m.Y', strtotime($task['date'])) : "";
         ?>
 
         <label class="form__label" for="date">Дата выполнения</label>
@@ -66,7 +66,7 @@
     </div>
 
     <div class="form__row form__row--controls">
-        <?php if ($errors): ?>
+        <?php if (isset($errors)): ?>
             <p class="error-message">Пожалуйста, исправьте ошибки в форме</p>
         <?php endif; ?>
 

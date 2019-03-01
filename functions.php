@@ -129,7 +129,7 @@ function is_task_time($taskData)
 function is_date_interval($interval, $date)
 {
     $current_interval = strtotime($date) + 86400 - time();
-    return ($current_interval > $interval['min'] || $interval['min'] === NULL)
-        && ($current_interval < $interval['max'] || $interval['max'] === NULL)
+    return (!isset($interval['min']) ||$current_interval > $interval['min'])
+        && (!isset($interval['max']) || $current_interval < $interval['max'])
         && ($date !== NULL || ($date === NULL && ($interval === 'all' || $interval === [])));
 }

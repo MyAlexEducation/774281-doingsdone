@@ -13,7 +13,16 @@ if (!$link) {
 }
 mysqli_set_charset($link, 'utf8');
 
+if(!isset($_SESSION['user'])) {
+    $_SESSION['user'] = NULL;
+}
+
+if(!isset($_SESSION['filters'])) {
+    $_SESSION['filters'] = NULL;
+}
+
 $current_user_id = $_SESSION['user']['id'];
+
 if ($current_user_id !== NULL) {
     $sql_get_list_project = 'SELECT * FROM projects WHERE user_id = ?';
     $db_categories = db_fetch_data($link, $sql_get_list_project, [$current_user_id]);

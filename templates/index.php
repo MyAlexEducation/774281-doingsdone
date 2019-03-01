@@ -17,14 +17,14 @@
     <label class="checkbox">
         <!--добавить сюда аттрибут "checked", если переменная $show_complete_tasks равна единице-->
         <input class="checkbox__input visually-hidden show_completed" type="checkbox"
-            <?php if ($_SESSION['filters']['show_completed']): ?> checked <?php endif; ?>>
+            <?php if ($_SESSION['filters']['filter_completed']): ?> checked <?php endif; ?>>
         <span class="checkbox__text">Показывать выполненные</span>
     </label>
 </div>
 
 <table class="tasks">
     <?php foreach ($tasks as $key => $item): ?>
-        <?php if ((!$item["isDone"] || $_SESSION['filters']['show_completed'])
+        <?php if ((!$item["isDone"] || $_SESSION['filters']['filter_completed'])
                    && ($_SESSION['filters']['filter_categories'] === 0 || $_SESSION['filters']['filter_categories'] === array_search($item['category'], $categories))
                    && (is_date_interval($intervals[$_SESSION['filters']['filter_task']], $item["data"]))): ?>
             <tr class="tasks__item task
@@ -40,7 +40,7 @@
                 </td>
 
                 <td class="task__file">
-                    <?php if ($item['file'] != NULL): ?>
+                    <?php if (isset($item['file'])): ?>
                         <a class="download-link" href="<?= $item['file']; ?>"><?= $item['file']; ?></a>
                     <?php endif; ?>
                 </td>
