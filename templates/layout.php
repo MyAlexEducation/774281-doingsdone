@@ -30,7 +30,7 @@
                         </div>
 
                         <div class="user-menu__data">
-                            <p><?= $_SESSION['user']['name']; ?></p>
+                            <p><?= esc($_SESSION['user']['name']); ?></p>
 
                             <a href="../logout.php">Выйти</a>
                         </div>

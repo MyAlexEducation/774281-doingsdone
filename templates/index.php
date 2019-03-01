@@ -8,10 +8,10 @@
 
 <div class="tasks-controls">
     <nav class="tasks-switch">
-        <a href="/?filter_task=all" class="tasks-switch__item <?php if ($_SESSION['filters']['filter_task'] === 'all'): ?> tasks-switch__item--active <?php endif; ?>">Все задачи</a>
-        <a href="/?filter_task=today" class="tasks-switch__item <?php if ($_SESSION['filters']['filter_task'] === 'today'): ?> tasks-switch__item--active <?php endif; ?>">Повестка дня</a>
-        <a href="/?filter_task=tomorrow" class="tasks-switch__item <?php if ($_SESSION['filters']['filter_task'] === 'tomorrow'): ?> tasks-switch__item--active <?php endif; ?>">Завтра</a>
-        <a href="/?filter_task=overdue" class="tasks-switch__item <?php if ($_SESSION['filters']['filter_task'] === 'overdue'): ?> tasks-switch__item--active <?php endif; ?>">Просроченные</a>
+        <a href="/?filter_task=all&filter=<?= $_GET['filter']; ?>" class="tasks-switch__item <?php if ($_SESSION['filters']['filter_task'] === 'all'): ?> tasks-switch__item--active <?php endif; ?>">Все задачи</a>
+        <a href="/?filter_task=today&filter=<?= $_GET['filter']; ?>" class="tasks-switch__item <?php if ($_SESSION['filters']['filter_task'] === 'today'): ?> tasks-switch__item--active <?php endif; ?>">Повестка дня</a>
+        <a href="/?filter_task=tomorrow&filter=<?= $_GET['filter']; ?>" class="tasks-switch__item <?php if ($_SESSION['filters']['filter_task'] === 'tomorrow'): ?> tasks-switch__item--active <?php endif; ?>">Завтра</a>
+        <a href="/?filter_task=overdue&filter=<?= $_GET['filter']; ?>" class="tasks-switch__item <?php if ($_SESSION['filters']['filter_task'] === 'overdue'): ?> tasks-switch__item--active <?php endif; ?>">Просроченные</a>
     </nav>
 
     <label class="checkbox">
@@ -24,9 +24,10 @@
 
 <table class="tasks">
     <?php foreach ($tasks as $key => $item): ?>
+    <?php if (!isset($item['data'])) {$item['data'] = NULL;} ?>
         <?php if ((!$item["isDone"] || $_SESSION['filters']['filter_completed'])
                    && ($_SESSION['filters']['filter_categories'] === 0 || $_SESSION['filters']['filter_categories'] === array_search($item['category'], $categories))
-                   && (is_date_interval($intervals[$_SESSION['filters']['filter_task']], $item["data"]))): ?>
+                   && (is_date_interval($intervals[$_SESSION['filters']['filter_task']], $item['data']))): ?>
             <tr class="tasks__item task
                 <?php if ($item["isDone"]): ?> task--completed <?php endif; ?>
                 <?php if (is_task_time($item["data"])): ?> task--important <?php endif; ?>
