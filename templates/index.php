@@ -8,10 +8,10 @@
 
 <div class="tasks-controls">
     <nav class="tasks-switch">
-        <a href="/?filter_task=all&filter=<?= $_GET['filter']; ?>" class="tasks-switch__item <?php if ($_SESSION['filters']['filter_task'] === 'all'): ?> tasks-switch__item--active <?php endif; ?>">Все задачи</a>
-        <a href="/?filter_task=today&filter=<?= $_GET['filter']; ?>" class="tasks-switch__item <?php if ($_SESSION['filters']['filter_task'] === 'today'): ?> tasks-switch__item--active <?php endif; ?>">Повестка дня</a>
-        <a href="/?filter_task=tomorrow&filter=<?= $_GET['filter']; ?>" class="tasks-switch__item <?php if ($_SESSION['filters']['filter_task'] === 'tomorrow'): ?> tasks-switch__item--active <?php endif; ?>">Завтра</a>
-        <a href="/?filter_task=overdue&filter=<?= $_GET['filter']; ?>" class="tasks-switch__item <?php if ($_SESSION['filters']['filter_task'] === 'overdue'): ?> tasks-switch__item--active <?php endif; ?>">Просроченные</a>
+        <a href="/?filter_task=all&filter=<?= intval($_GET['filter']); ?>" class="tasks-switch__item <?php if ($_SESSION['filters']['filter_task'] === 'all'): ?> tasks-switch__item--active <?php endif; ?>">Все задачи</a>
+        <a href="/?filter_task=today&filter=<?= intval($_GET['filter']); ?>" class="tasks-switch__item <?php if ($_SESSION['filters']['filter_task'] === 'today'): ?> tasks-switch__item--active <?php endif; ?>">Повестка дня</a>
+        <a href="/?filter_task=tomorrow&filter=<?= intval($_GET['filter']); ?>" class="tasks-switch__item <?php if ($_SESSION['filters']['filter_task'] === 'tomorrow'): ?> tasks-switch__item--active <?php endif; ?>">Завтра</a>
+        <a href="/?filter_task=overdue&filter=<?= intval($_GET['filter']); ?>" class="tasks-switch__item <?php if ($_SESSION['filters']['filter_task'] === 'overdue'): ?> tasks-switch__item--active <?php endif; ?>">Просроченные</a>
     </nav>
 
     <label class="checkbox">

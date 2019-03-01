@@ -1,25 +1,23 @@
 <?php
 require_once('init.php');
 
-if (isset($_GET['filter_task'])) {
-    $filters['filter_task'] = $_GET['filter_task'];
-    if ($intervals[$filters['filter_task']] === NULL) {
-        http_response_code(404);
-    } else {
-        $_SESSION['filters']['filter_task']= $filters['filter_task'];
-    }
+if (isset($_GET['filter_task']) && !isset($intervals[$_GET['filter_task']])) {
+    http_response_code(404);
+} else {
+    $_SESSION['filters']['filter_task'] = isset($_GET['filter_task']) ? $_GET['filter_task'] : 'all';
 }
+
 
 if (isset($_GET['show_completed'])) {
     $filters['show_completed'] = ($_GET['show_completed'] === '1');
     $_SESSION['filters']['filter_completed'] = $filters['show_completed'];
 }
 
-if(!isset($_GET['task_id'])) {
+if (!isset($_GET['task_id'])) {
     $_GET['task_id'] = NULL;
 }
 
-if (intval($_GET['task_id']) != 0  && (intval($_GET['check']) == 0 || intval($_GET['check']) == 1)) {
+if (intval($_GET['task_id']) != 0 && (intval($_GET['check']) == 0 || intval($_GET['check']) == 1)) {
     $is_page_update = false;
     $value_state = intval($_GET['check']);
     $value_task_id = intval($_GET['task_id']);
