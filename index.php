@@ -17,6 +17,12 @@ if (!isset($_GET['task_id'])) {
     $_GET['task_id'] = NULL;
 }
 
+if(isset($_GET['search_task'])) {
+    $sql_get_list_tasks = $sql_get_list_tasks . ' AND MATCH(tasks.title) AGAINST(?)';
+    $db_tasks = db_fetch_data($link, $sql_get_list_tasks, [$current_user_id, $_GET['search_task']]);
+    convert_db_tasks($db_tasks, $tasks);
+}
+
 if (intval($_GET['task_id']) != 0 && (intval($_GET['check']) == 0 || intval($_GET['check']) == 1)) {
     $is_page_update = false;
     $value_state = intval($_GET['check']);

@@ -27,7 +27,9 @@ CREATE TABLE tasks (
   state TINYINT NOT NULL,
   title CHAR(128) NOT NULL,
   file CHAR(128),
-  critical_time TIMESTAMP
+  critical_time TIMESTAMP,
+
+  FULLTEXT (title)
 );
 
 CREATE UNIQUE INDEX email ON users(email);
