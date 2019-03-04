@@ -19,7 +19,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $errors['email'] = 'E-mail введён некорректно';
     } else {
         $sql_get_user = 'SELECT * FROM users WHERE email = ?';
-        $user = db_fetch_data($link, $sql_get_user, [$login_info['email']])[0];
+        $sql_user = db_fetch_data($link, $sql_get_user, [$login_info['email']]);
+        $user = array_shift($sql_user);
         if (!$user) {
             $errors['email'] = 'Пользователя с такой почтой не существует';
         }
