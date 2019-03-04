@@ -57,7 +57,7 @@ INSERT INTO tasks
       project_id = 4,
       state = 0,
       title = 'Купить корм для кота',
-      critical_time = STR_TO_DATE('03.03.2019 15:59', '%d.%m.%Y %H:%i');
+      critical_time = STR_TO_DATE('04.03.2019 13:39', '%d.%m.%Y %H:%i');
 INSERT INTO tasks
   SET user_id = 2,
       project_id = 4,
