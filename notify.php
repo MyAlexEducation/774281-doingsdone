@@ -20,7 +20,7 @@ foreach ($critical_tasks as $key => $item) {
 
     $recipient = [];
     $recipient[$item['email']] = $item['name'];
-    $message->setBcc($recipient);
+    $message->setTo($recipient);
     $message_content = 'Уважаемый, ' . $item['name'] . '. У вас запланирована задача ' . $item['title'] . ' на ' . $item['critical_time'];
     $message->setBody($message_content, 'text/plain');
 
