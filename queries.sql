@@ -18,11 +18,11 @@ INSERT INTO projects
 -- добавляет пару придуманных пользователей
 
 INSERT INTO users
-  SET email = 'vasya@post.rf',
+  SET email = 'vasya@milo.tg',
       name = 'Вася',
       password = '$2y$10$xxEJxfsLJj4nZDFkeUMw4OFzx4J8f5QVRleIV9lPl8.cPKNRWij/G';
 INSERT INTO users
-  SET email = 'petya@post.rf',
+  SET email = 'myAlexEducation@gmail.com',
       name = 'Петя',
       password = '$2y$10$NRiLw/xDmMoIOT.lXXewqOxeAe7n9MTFhVUVLhdAu/sGo0FLQ90C2';
 
@@ -56,7 +56,8 @@ INSERT INTO tasks
   SET user_id = 2,
       project_id = 4,
       state = 0,
-      title = 'Купить корм для кота';
+      title = 'Купить корм для кота',
+      critical_time = STR_TO_DATE('04.03.2019 13:39', '%d.%m.%Y %H:%i');
 INSERT INTO tasks
   SET user_id = 2,
       project_id = 4,

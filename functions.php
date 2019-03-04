@@ -117,7 +117,6 @@ function count_category($elements, $category)
     return $count;
 }
 
-
 function is_task_time($taskData)
 {
     $currentTime = time();
