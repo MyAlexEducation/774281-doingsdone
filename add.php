@@ -19,11 +19,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $dict = ['date' => 'Дата', 'project' => 'Проект', 'name' => 'Название'];
     $errors = [];
 
-    if (empty($_POST['name'])) {
+    if (!isset($_POST['name']) || empty($_POST['name'])) {
         $errors['name'] = 'Это поле надо заполнить';
     }
 
-    if ($categories[$_POST['project']] === NULL || $categories[$_POST['project']] === '') {
+    if (!isset($_POST['project']) || $categories[$_POST['project']] === NULL || $categories[$_POST['project']] === '') {
         $errors['project'] = 'Такого проекта не существует';
     }
 
