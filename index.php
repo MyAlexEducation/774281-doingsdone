@@ -18,7 +18,6 @@ if ($current_user_id !== NULL) {
             $sql_update_isDone_task = 'UPDATE tasks SET state = ? WHERE id = ?';
             $sql_task_info = [$task_state, $task_id];
             db_fetch_data($link, $sql_update_isDone_task, $sql_task_info);
-            db_fetch_data($link, $sql_update_isDone_task, $sql_task_info);
         }
     }
 
