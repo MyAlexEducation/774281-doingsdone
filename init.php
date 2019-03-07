@@ -14,17 +14,12 @@ if (!$link) {
 }
 mysqli_set_charset($link, 'utf8');
 
-if (!isset($_SESSION['user'])) {
-    $_SESSION['user'] = [
-        'id' => NULL,
-    ];
-}
-
 if (!isset($_SESSION['show_completed'])) {
     $_SESSION['show_completed'] = 0;
 }
 
-$current_user_id = $_SESSION['user']['id'];
+
+$current_user_id = isset($_SESSION['user']['id']) ? $_SESSION['user']['id'] : NULL;
 
 if ($current_user_id !== NULL) {
     $sql_get_list_categories = 'SELECT *, (SELECT COUNT(*) FROM tasks as t WHERE t.project_id=projects.id) as cnt FROM projects WHERE user_id = ?';
