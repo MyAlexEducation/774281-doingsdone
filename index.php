@@ -31,8 +31,6 @@ if ($current_user_id !== NULL) {
         $_GET['filter_task'] = 'all';
     }
     switch ($_GET['filter_task']) {
-        case 'all':
-            break;
         case 'today':
             $sql_get_list_tasks = $sql_get_list_tasks . ' AND critical_time >= DATE_FORMAT(NOW(), \'%Y-%m-%d 00:00:00\') AND critical_time <= DATE_FORMAT(NOW(), \'%Y-%m-%d 23:59:59\')';
             break;
@@ -42,8 +40,6 @@ if ($current_user_id !== NULL) {
         case 'overdue':
             $sql_get_list_tasks = $sql_get_list_tasks . ' AND critical_time < DATE_FORMAT(NOW(), \'%Y-%m-%d 00:00:00\')';
             break;
-        default:
-            http_response_code(404);
     }
 
     if (isset($_GET['show_completed'])) {
