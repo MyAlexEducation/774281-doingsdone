@@ -9,17 +9,17 @@
     <link rel="stylesheet" href="css/flatpickr.min.css">
 </head>
 
-<body <?php if ($access == 'user' && $_SESSION['user']['id'] == NULL): ?> class="body-background" <?php endif; ?>>
+<body <?php if ($access == 'user' && !isset($_SESSION['user']['id'])): ?> class="body-background" <?php endif; ?>>
 <h1 class="visually-hidden">Дела в порядке</h1>
 
 <div class="page-wrapper">
-    <div class="container <?php if ($access == 'user' && $_SESSION['user']['id'] != NULL && $sidebar != NULL): ?> container--with-sidebar <?php endif; ?>">
+    <div class="container <?php if ($access == 'user' && isset($_SESSION['user']['id']) && $sidebar != NULL): ?> container--with-sidebar <?php endif; ?>">
         <header class="main-header">
             <a href="/">
                 <img src="img/logo.png" width="153" height="42" alt="Логотип Дела в порядке">
             </a>
 
-            <?php if ($_SESSION['user']['id'] != NULL): ?>
+            <?php if (isset($_SESSION['user']['id'])): ?>
                 <div class="main-header__side">
                     <a class="main-header__side-item button button--plus open-modal" href="add.php">Добавить
                         задачу</a>
@@ -30,7 +30,7 @@
                         </div>
 
                         <div class="user-menu__data">
-                            <p><?= esc($_SESSION['user']['name']); ?></p>
+                            <p><?= isset($_SESSION['user']['name']) ? esc($_SESSION['user']['name']) : ''; ?></p>
 
                             <a href="../logout.php">Выйти</a>
                         </div>
@@ -44,7 +44,7 @@
         </header>
 
         <div class="content">
-            <?php if ($access == 'all' || $_SESSION['user']['id'] != NULL): ?>
+            <?php if ($access == 'all' || isset($_SESSION['user']['id'])): ?>
                 <section class="content__side">
                     <?= $sidebar; ?>
                 </section>
@@ -67,7 +67,7 @@
             <p>Веб-приложение для удобного ведения списка дел.</p>
         </div>
 
-        <?php if ($access == 'user' && $_SESSION['user'] != NULL): ?>
+        <?php if ($access == 'user' && isset($_SESSION['user'])): ?>
             <a class="main-footer__button button button--plus" href="add.php">Добавить задачу</a>
         <?php endif; ?>
 

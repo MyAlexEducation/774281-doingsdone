@@ -4,7 +4,7 @@
     <ul class="main-navigation__list">
         <?php foreach ($categories as $key => $item): ?>
             <li class="main-navigation__list-item
-                <?php if (intval($_GET['category']) === $item['id']): ?> main-navigation__list-item--active <?php endif; ?>">
+                <?php if (isset($_GET['category']) && (intval($_GET['category']) === $item['id'])): ?> main-navigation__list-item--active <?php endif; ?>">
                 <a class="main-navigation__list-item-link" href="/?category=<?= intval($item['id']); ?> ">
                     <?= esc($item['title']); ?>
                 </a>
