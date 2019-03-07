@@ -1,3 +1,8 @@
+<?php
+$filter_task = isset($_GET['filter_task']) ? esc($_GET['filter_task']) : 'all';
+$category = isset($_GET['category']) ? intval($_GET['category']) : 0;
+?>
+
 <h2 class="content__main-heading">Список задач</h2>
 
 <form class="search-form" action="index.php" method="get">
@@ -8,16 +13,16 @@
 
 <div class="tasks-controls">
     <nav class="tasks-switch">
-        <a href="/?filter_task=all&category=<?= intval($_GET['category']); ?>"
-           class="tasks-switch__item <?php if ($_GET['filter_task'] === 'all'): ?> tasks-switch__item--active <?php endif; ?>">Все
+        <a href="/?filter_task=all&category=<?= $category; ?>"
+           class="tasks-switch__item <?php if ($filter_task === 'all'): ?> tasks-switch__item--active <?php endif; ?>">Все
             задачи</a>
-        <a href="/?filter_task=today&category=<?= intval($_GET['category']); ?>"
-           class="tasks-switch__item <?php if ($_GET['filter_task'] === 'today'): ?> tasks-switch__item--active <?php endif; ?>">Повестка
+        <a href="/?filter_task=today&category=<?= $category; ?>"
+           class="tasks-switch__item <?php if ($filter_task === 'today'): ?> tasks-switch__item--active <?php endif; ?>">Повестка
             дня</a>
-        <a href="/?filter_task=tomorrow&category=<?= intval($_GET['category']); ?>"
-           class="tasks-switch__item <?php if ($_GET['filter_task'] === 'tomorrow'): ?> tasks-switch__item--active <?php endif; ?>">Завтра</a>
-        <a href="/?filter_task=overdue&category=<?= intval($_GET['category']); ?>"
-           class="tasks-switch__item <?php if ($_GET['filter_task'] === 'overdue'): ?> tasks-switch__item--active <?php endif; ?>">Просроченные</a>
+        <a href="/?filter_task=tomorrow&category=<?= $category; ?>"
+           class="tasks-switch__item <?php if ($filter_task === 'tomorrow'): ?> tasks-switch__item--active <?php endif; ?>">Завтра</a>
+        <a href="/?filter_task=overdue&category=<?= $category; ?>"
+           class="tasks-switch__item <?php if ($filter_task === 'overdue'): ?> tasks-switch__item--active <?php endif; ?>">Просроченные</a>
     </nav>
 
     <label class="checkbox">
@@ -34,7 +39,7 @@
         <?php foreach ($tasks as $key => $item): ?>
             <tr class="tasks__item task
                 <?php if ($item['state'] === 1): ?> task--completed <?php endif; ?>
-                <?php if (is_task_time($item['critical_time'])): ?> task--important <?php endif; ?>
+                <?php if (is_task_time($item['critical_time']) && $item['state'] === 0): ?> task--important <?php endif; ?>
                 ">
                 <td class="task__select">
                     <label class="checkbox task__checkbox">

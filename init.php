@@ -24,10 +24,6 @@ if (!isset($_SESSION['show_completed'])) {
     $_SESSION['show_completed'] = 0;
 }
 
-if (!isset($_GET['filter'])) {
-    $_GET['filter'] = NULL;
-}
-
 $current_user_id = $_SESSION['user']['id'];
 
 if ($current_user_id !== NULL) {

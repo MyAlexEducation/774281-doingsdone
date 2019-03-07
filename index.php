@@ -3,43 +3,51 @@ require_once('init.php');
 
 $show_completed = false;
 
-if (isset($_GET['filter_task']) && !isset($intervals[$_GET['filter_task']])) {
-    http_response_code(404);
-}
-
-if (!isset($_GET['task_id'])) {
-    $_GET['task_id'] = NULL;
-}
-
 if ($current_user_id !== NULL) {
-    $sql_get_list_tasks = 'SELECT * FROM tasks WHERE user_id = ?';
-    $sql_tasks_info = [$current_user_id];
-
-    if (!isset($_GET['category'])) {
-        $_GET['category'] = '0';
+    $task_id = isset($_GET['task_id']) ? intval($_GET['task_id']) : NULL;
+    if (isset($_GET['check'])) {
+        $task_state = intval($_GET['check']) === 1 ? 1 : 0;
+    } else {
+        $task_state = 0;
     }
-    if ($_GET['category'] !== '0' && !empty($categories)) {
-        if (!in_array(intval($_GET['category']), array_column($categories, 'id'))) {
-            http_response_code(404);
-        } else {
-            $sql_get_list_tasks = $sql_get_list_tasks . ' AND project_id = ?';
-            $sql_tasks_info[] = intval($_GET['category']);
+    if ($task_id !== NULL) {
+        $sql_get_update_task = 'SELECT * FROM tasks WHERE id = ? AND user_id = ?';
+        $sql_update_task_info = [$task_id, $current_user_id];
+        $update_task = db_fetch_data($link, $sql_get_update_task, $sql_update_task_info);
+        if (!empty($update_task)) {
+            $sql_update_isDone_task = 'UPDATE tasks SET state = ? WHERE id = ?';
+            $sql_task_info = [$task_state, $task_id];
+            db_fetch_data($link, $sql_update_isDone_task, $sql_task_info);
+            db_fetch_data($link, $sql_update_isDone_task, $sql_task_info);
         }
     }
 
-    if (!isset($_GET['filter_task'])) {
-        $_GET['filter_task'] = 'all';
+    $sql_get_list_tasks = 'SELECT * FROM tasks WHERE user_id = ?';
+    $sql_tasks_info = [$current_user_id];
+
+    if(isset($_GET['category'])) {
+        if ($_GET['category'] !== '0' && !empty($categories)) {
+            if (!in_array(intval($_GET['category']), array_column($categories, 'id'))) {
+                http_response_code(404);
+            } else {
+                $sql_get_list_tasks = $sql_get_list_tasks . ' AND project_id = ?';
+                $sql_tasks_info[] = intval($_GET['category']);
+            }
+        }
     }
-    switch ($_GET['filter_task']) {
-        case 'today':
-            $sql_get_list_tasks = $sql_get_list_tasks . ' AND critical_time >= DATE_FORMAT(NOW(), \'%Y-%m-%d 00:00:00\') AND critical_time <= DATE_FORMAT(NOW(), \'%Y-%m-%d 23:59:59\')';
-            break;
-        case 'tomorrow':
-            $sql_get_list_tasks = $sql_get_list_tasks . ' AND critical_time >= DATE_FORMAT(NOW() + INTERVAL 1 DAY, \'%Y-%m-%d 00:00:00\') AND critical_time <= DATE_FORMAT(NOW() + INTERVAL 1 DAY, \'%Y-%m-%d 23:59:59\')';
-            break;
-        case 'overdue':
-            $sql_get_list_tasks = $sql_get_list_tasks . ' AND critical_time < DATE_FORMAT(NOW(), \'%Y-%m-%d 00:00:00\')';
-            break;
+
+    if (isset($_GET['filter_task'])) {
+        switch ($_GET['filter_task']) {
+            case 'today':
+                $sql_get_list_tasks = $sql_get_list_tasks . ' AND critical_time >= DATE_FORMAT(NOW(), \'%Y-%m-%d 00:00:00\') AND critical_time <= DATE_FORMAT(NOW(), \'%Y-%m-%d 23:59:59\')';
+                break;
+            case 'tomorrow':
+                $sql_get_list_tasks = $sql_get_list_tasks . ' AND critical_time >= DATE_FORMAT(NOW() + INTERVAL 1 DAY, \'%Y-%m-%d 00:00:00\') AND critical_time <= DATE_FORMAT(NOW() + INTERVAL 1 DAY, \'%Y-%m-%d 23:59:59\')';
+                break;
+            case 'overdue':
+                $sql_get_list_tasks = $sql_get_list_tasks . ' AND critical_time < DATE_FORMAT(NOW(), \'%Y-%m-%d 00:00:00\')';
+                break;
+        }
     }
 
     if (isset($_GET['show_completed'])) {
@@ -58,24 +66,6 @@ if ($current_user_id !== NULL) {
     }
 
     $tasks = db_fetch_data($link, $sql_get_list_tasks, $sql_tasks_info);
-}
-
-if (intval($_GET['task_id']) != 0 && (intval($_GET['check']) == 0 || intval($_GET['check']) == 1)) {
-    $is_page_update = false;
-    $value_state = intval($_GET['check']);
-    $value_task_id = intval($_GET['task_id']);
-    $sql_update_isDone_task = 'UPDATE tasks SET state = ? WHERE id = ?';
-    $sql_task_info = [$value_state, $value_task_id];
-    foreach ($tasks as $key => $item) {
-        if ($item['id'] === $value_task_id && intval($item['state']) !== $value_state) {
-            db_fetch_data($link, $sql_update_isDone_task, $sql_task_info);
-            $is_page_update = true;
-        }
-    }
-    if ($is_page_update) {
-        $is_page_update = false;
-        header('Refresh:0');
-    }
 }
 
 $sidebar = include_template('project_sidebar.php', [
