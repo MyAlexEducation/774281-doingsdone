@@ -54,8 +54,11 @@ if ($current_user_id !== NULL) {
     }
 
     if (isset($_GET['search_task'])) {
-        $sql_get_list_tasks = $sql_get_list_tasks . ' AND MATCH(tasks.title) AGAINST(?)';
-        $sql_tasks_info[] = $_GET['search_task'];
+        $search = trim($_GET['search_task']);
+        if (strlen($search) > 3) {
+            $sql_get_list_tasks = $sql_get_list_tasks . ' AND MATCH(tasks.title) AGAINST(?)';
+            $sql_tasks_info[] = $_GET['search_task'];
+        }
     }
 
     $tasks = db_fetch_data($link, $sql_get_list_tasks, $sql_tasks_info);

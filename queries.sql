@@ -80,13 +80,13 @@ INSERT INTO tasks
       project_id = 2,
       state = 1,
       title = 'просроченно',
-      critical_time = STR_TO_DATE('06.03.2019', '%d.%m.%Y');
+      critical_time = STR_TO_DATE('07.03.2019', '%d.%m.%Y');
 INSERT INTO tasks
   SET user_id = 2,
       project_id = 2,
       state = 1,
       title = 'просроченно2',
-      critical_time = STR_TO_DATE('05.03.2019', '%d.%m.%Y');
+      critical_time = STR_TO_DATE('07.03.2019', '%d.%m.%Y');
 
 -- получить список из всех проектов для одного пользователя
 SELECT * FROM projects WHERE user_id = 1;
