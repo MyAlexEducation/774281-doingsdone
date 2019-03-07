@@ -4,12 +4,12 @@
     <ul class="main-navigation__list">
         <?php foreach ($categories as $key => $item): ?>
             <li class="main-navigation__list-item
-                <?php if (intval($_SESSION['filters']['filter_categories']) === array_search($item, $categories)): ?> main-navigation__list-item--active <?php endif; ?>">
-                <a class="main-navigation__list-item-link" href="/?filter=<?= array_search($item, $categories); ?> ">
-                    <?= esc($item); ?>
+                <?php if (intval($_GET['category']) === $item['id']): ?> main-navigation__list-item--active <?php endif; ?>">
+                <a class="main-navigation__list-item-link" href="/?category=<?= intval($item['id']); ?> ">
+                    <?= esc($item['title']); ?>
                 </a>
                 <span class="main-navigation__list-item-count">
-                                    <?php echo(count_category($tasks, $item)) ?>
+                                    <?= esc($item['cnt']) ?>
                                 </span>
             </li>
         <?php endforeach; ?>

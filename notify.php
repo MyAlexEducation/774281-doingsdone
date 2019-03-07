@@ -10,7 +10,7 @@ $mailer = new Swift_Mailer($transport);
 $logger = new Swift_Plugins_Loggers_ArrayLogger();
 $mailer->registerPlugin(new Swift_Plugins_LoggerPlugin($logger));
 
-$sql_get_tasks = 'SELECT title, critical_time, name, email  FROM tasks JOIN users ON tasks.user_id = users.id WHERE critical_time < DATE_SUB(NOW(), INTERVAL -1 HOUR)';
+$sql_get_tasks = 'SELECT users.id, GROUP_CONCAT(title SEPARATOR \',\') AS tasks, GROUP_CONCAT(critical_time SEPARATOR \',\') AS times, name, email  FROM tasks JOIN users ON tasks.user_id = users.id WHERE critical_time < DATE_SUB(NOW(), INTERVAL -1 HOUR) GROUP BY users.id ORDER BY critical_time';
 $critical_tasks = db_fetch_data($link, $sql_get_tasks);
 
 foreach ($critical_tasks as $key => $item) {
@@ -21,7 +21,7 @@ foreach ($critical_tasks as $key => $item) {
     $recipient = [];
     $recipient[$item['email']] = $item['name'];
     $message->setTo($recipient);
-    $message_content = 'Уважаемый, ' . $item['name'] . '. У вас запланирована задача ' . $item['title'] . ' на ' . $item['critical_time'];
+    $message_content = 'Уважаемый, ' . $item['name'] . '. У вас запланирована задача ' . $item['tasks'] . ' на ' . $item['times'];
     $message->setBody($message_content, 'text/plain');
 
     $result = $mailer->send($message);
