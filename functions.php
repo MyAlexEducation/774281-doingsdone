@@ -81,54 +81,10 @@ function db_insert_data($link, $sql, $data = [])
     return $result;
 }
 
-function convert_db_categories($db, &$data) {
-    $data = [];
-    foreach ($db as $key => $item) {
-        $data[$item['id']] = $item['title'];
-    };
-}
-
-function convert_db_tasks($db, &$data) {
-    $data = [];
-    foreach ($db as $key => $item) {
-        $task = [];
-        $task['name'] = $item['title'];
-        if ($item['critical_time'] != NULL) {
-            $task['data'] = date('d.m.Y', strtotime($item['critical_time']));
-        }
-        if ($item['file'] != NULL) {
-            $task['file'] = $item['file'];
-        }
-        $task['category'] = $item['project'];
-        $task['isDone'] = ($item['state'] === 1);
-        $task['id'] = ($item['id']);
-        array_push($data, $task);
-    };
-}
-
-function count_category($elements, $category)
-{
-    $count = 0;
-    foreach ($elements as $key => $item) {
-        if ($item["category"] === $category) {
-            $count++;
-        }
-    }
-    return $count;
-}
-
 function is_task_time($taskData)
 {
     $currentTime = time();
     $taskTime = strtotime($taskData);
     $criticalTaskTime = 3600;  //количество секунд в часе
     return $taskTime - $currentTime < $criticalTaskTime && $taskTime != 0;
-}
-
-function is_date_interval($interval, $date)
-{
-    $current_interval = strtotime($date) + 86400 - time();
-    return (!isset($interval['min']) ||$current_interval > $interval['min'])
-        && (!isset($interval['max']) || $current_interval < $interval['max'])
-        && ($date !== NULL || ($date === NULL && ($interval === 'all' || $interval === [])));
 }

@@ -29,7 +29,7 @@
                         selected
                     <?php endif; ?>
                 >
-                    <?php echo esc($item); ?>
+                    <?php echo esc($item['title']); ?>
                 </option>
             <?php endforeach; ?>
         </select>

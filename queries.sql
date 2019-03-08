@@ -45,7 +45,7 @@ INSERT INTO tasks
       project_id = 2,
       state = 1,
       title = 'Сделать задание первого раздела',
-      critical_time = STR_TO_DATE('21.12.2019', '%d.%m.%Y');
+      critical_time = STR_TO_DATE('07.03.2019', '%d.%m.%Y');
 INSERT INTO tasks
   SET user_id = 1,
       project_id = 1,
@@ -53,16 +53,40 @@ INSERT INTO tasks
       title = 'Встреча с другом',
       critical_time = STR_TO_DATE('22.12.2019', '%d.%m.%Y');
 INSERT INTO tasks
+  SET user_id = 1,
+      project_id = 1,
+      state = 0,
+      title = 'просрочено',
+      critical_time = STR_TO_DATE('01.01.2019', '%d.%m.%Y');
+INSERT INTO tasks
   SET user_id = 2,
       project_id = 4,
       state = 0,
       title = 'Купить корм для кота',
-      critical_time = STR_TO_DATE('04.03.2019 13:39', '%d.%m.%Y %H:%i');
+      critical_time = STR_TO_DATE('08.03.2019 13:39', '%d.%m.%Y %H:%i');
 INSERT INTO tasks
   SET user_id = 2,
       project_id = 4,
       state = 0,
       title = 'Заказать пиццу';
+INSERT INTO tasks
+  SET user_id = 2,
+      project_id = 2,
+      state = 1,
+      title = 'завтра',
+      critical_time = STR_TO_DATE('08.03.2019', '%d.%m.%Y');
+INSERT INTO tasks
+  SET user_id = 2,
+      project_id = 2,
+      state = 1,
+      title = 'просроченно',
+      critical_time = STR_TO_DATE('07.03.2019', '%d.%m.%Y');
+INSERT INTO tasks
+  SET user_id = 2,
+      project_id = 2,
+      state = 1,
+      title = 'просроченно2',
+      critical_time = STR_TO_DATE('07.03.2019', '%d.%m.%Y');
 
 -- получить список из всех проектов для одного пользователя
 SELECT * FROM projects WHERE user_id = 1;

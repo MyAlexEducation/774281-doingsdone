@@ -39,13 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     ]);
 
     if (empty($errors)) {
-        $current_user_id = intval($user['id']);
         $_SESSION['user'] = $user;
-        $_SESSION['filters'] = [
-            'filter_categories' => 0,
-            'filter_task' => 'all',
-            'filter_completed' => false
-        ];
         header('Location: /');
     }
 }
@@ -54,8 +48,6 @@ $layout_content = include_template('layout.php', [
     'title' => 'Дела в порядке',
     'content' => $page_content,
     'sidebar' => $sidebar,
-    'categories' => $categories,
-    'tasks' => $tasks,
     'access' => $access
 ]);
 

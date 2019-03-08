@@ -53,8 +53,6 @@ $layout_content = include_template('layout.php', [
     'title' => 'Дела в порядке',
     'content' => $page_content,
     'sidebar' => $sidebar,
-    'categories' => $categories,
-    'tasks' => $tasks,
     'access' => $access
 ]);
 
