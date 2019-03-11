@@ -10,8 +10,6 @@ $page_content = include_template('register.php', []);
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $user = $_POST;
 
-    $required = ['email', 'password', 'name'];
-    $dict = ['email' => 'Почта', 'password' => 'Пароль', 'name' => 'Имя'];
     $errors = [];
 
     if ($_POST['email'] === NULL || $_POST['email'] === '') {
@@ -37,7 +35,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $page_content = include_template('register.php', [
         'user' => $user,
         'errors' => $errors,
-        'dict' => $dict,
     ]);
 
     if (empty($errors)) {

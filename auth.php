@@ -9,7 +9,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $login_info = $_POST;
 
     $required = ['email', 'password'];
-    $dict = ['email' => 'Почта', 'password' => 'Пароль'];
     $errors = [];
 
     if ($_POST['email'] === NULL || $_POST['email'] === '') {
@@ -35,7 +34,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $page_content = include_template('auth.php', [
         'login_info' => $login_info,
         'errors' => $errors,
-        'dict' => $dict,
     ]);
 
     if (empty($errors)) {

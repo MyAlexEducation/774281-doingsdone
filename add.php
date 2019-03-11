@@ -15,8 +15,6 @@ $page_content = include_template('add.php', [
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $task = $_POST;
 
-    $required = ['date', 'project', 'name'];
-    $dict = ['date' => 'Дата', 'project' => 'Проект', 'name' => 'Название'];
     $errors = [];
 
     if (!isset($_POST['name']) || empty($_POST['name'])) {
@@ -43,7 +41,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $page_content = include_template('add.php', [
         'task' => $task,
         'errors' => $errors,
-        'dict' => $dict,
         'categories' => $categories
     ]);
 
