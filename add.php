@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $errors['name'] = 'Это поле надо заполнить';
     }
 
-    if (!isset($_POST['project']) || $categories[$_POST['project']] === NULL || $categories[$_POST['project']] === '') {
+    if (isset($_POST['project']) && !in_array(intval($_POST['project']), array_column($categories, 'id'))) {
         $errors['project'] = 'Такого проекта не существует';
     }
 
@@ -48,8 +48,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     ]);
 
     if (empty($errors)) {
-        $sql_put_new_task = 'INSERT INTO tasks SET user_id = ?, project_id = ?, state = ?, title = ?';
-        $new_task_info = [$current_user_id, intval($_POST['project']), 0, $_POST['name']];
+        $sql_put_new_task = 'INSERT INTO tasks SET user_id = ?, state = ?, title = ?';
+        $new_task_info = [$current_user_id, 0, $_POST['name']];
+        if (isset($_POST['project'])) {
+            $sql_put_new_task = $sql_put_new_task . ', project_id = ?';
+            $new_task_info[] = $_POST['project'];
+        }
         if (!($_POST['date'] === '' or $_POST['date'] === NULL)) {
             $sql_put_new_task = $sql_put_new_task . ', critical_time = STR_TO_DATE(?, \'%d.%m.%Y\')';
             $new_task_info[] = $_POST['date'];
