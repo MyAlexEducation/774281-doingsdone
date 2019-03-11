@@ -2,10 +2,10 @@
 require_once('init.php');
 
 $show_completed = false;
+$errors = [];
+$search = [];
 
 if ($current_user_id !== NULL) {
-    $errors = [];
-    $search = [];
 
     $task_id = isset($_GET['task_id']) ? intval($_GET['task_id']) : NULL;
     if (isset($_GET['check'])) {
