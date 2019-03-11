@@ -4,6 +4,9 @@ require_once('init.php');
 $show_completed = false;
 
 if ($current_user_id !== NULL) {
+    $errors = [];
+    $search = [];
+
     $task_id = isset($_GET['task_id']) ? intval($_GET['task_id']) : NULL;
     if (isset($_GET['check'])) {
         $task_state = intval($_GET['check']) === 1 ? 1 : 0;
@@ -57,10 +60,14 @@ if ($current_user_id !== NULL) {
     }
 
     if (isset($_GET['search_task'])) {
-        $search = trim($_GET['search_task']);
-        if (strlen($search) > 3) {
+        $errors = [];
+        $search_task = trim($_GET['search_task']);
+        $search['search_task'] = $search_task;
+        if (strlen($search_task) > 3) {
             $sql_get_list_tasks = $sql_get_list_tasks . ' AND MATCH(tasks.title) AGAINST(?)';
-            $sql_tasks_info[] = $_GET['search_task'];
+            $sql_tasks_info[] = $search_task;
+        } else {
+            $errors['search_task'] = 'Введите для поиска более трёх символов';
         }
     }
 
@@ -75,6 +82,8 @@ $page_content = include_template('index.php', [
     'tasks' => $tasks,
     'categories' => $categories,
     'show_completed' => $show_completed,
+    'errors' => $errors,
+    'search' => $search,
 ]);
 
 $layout_content = include_template('layout.php', [

@@ -14,7 +14,6 @@ $page_content = include_template('add.php', [
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $task = $_POST;
-
     $errors = [];
 
     if (!isset($_POST['name']) || empty($_POST['name'])) {
