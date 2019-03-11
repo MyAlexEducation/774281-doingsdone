@@ -6,7 +6,13 @@ $category = isset($_GET['category']) ? intval($_GET['category']) : 0;
 <h2 class="content__main-heading">Список задач</h2>
 
 <form class="search-form" action="index.php" method="get">
-    <input class="search-form__input" type="text" name="search_task" value="" placeholder="Поиск по задачам">
+    <?php
+    $value = isset($search['search_task']) ? $search['search_task'] : '';
+    ?>
+    <input class="search-form__input" type="text" name="search_task" value="<?= $value; ?>" placeholder="Поиск по задачам">
+    <?php if (isset($errors['search_task'])): ?>
+        <p class="form__message"><?= $errors['search_task']; ?></p>
+    <?php endif; ?>
 
     <input class="search-form__submit" type="submit" name="" value="Искать">
 </form>

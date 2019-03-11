@@ -24,8 +24,8 @@
 
         <select class="form__input form__input--select <?= $classname; ?>" name="project" id="project">
             <?php foreach ($categories as $key => $item): ?>
-                <option value="<?= array_search($item, $categories); ?>"
-                    <?php if (intval($value) === array_search($item, $categories)): ?>
+                <option value="<?= $item['id'] ?>"
+                    <?php if (intval($value) === $item['id']): ?>
                         selected
                     <?php endif; ?>
                 >

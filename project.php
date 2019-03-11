@@ -10,9 +10,6 @@ $page_content = include_template('project.php', []);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $form_info = $_POST;
-
-    $required = ['name'];
-    $dict = ['name' => 'Название'];
     $errors = [];
 
     if (empty($_POST['name'])) {
