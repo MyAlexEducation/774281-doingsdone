@@ -60,7 +60,6 @@ if ($current_user_id !== NULL) {
     }
 
     if (isset($_GET['search_task'])) {
-        $errors = [];
         $search_task = trim($_GET['search_task']);
         $search['search_task'] = $search_task;
         if (strlen($search_task) > 3) {
